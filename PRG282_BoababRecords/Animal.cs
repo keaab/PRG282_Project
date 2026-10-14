@@ -16,13 +16,10 @@ public class Animal
         Species = species;
         Age = age;
         RecoveryScore = recoveryscore;
-        Status = status;
-        HousingUnit = housingunit;
+        Classify();
     }
 
-    public string ToFileLine() => $"{AnimalID}|{Name}|{Species}|{Age}|{RecoveryScore}|{Status}|{HousingUnit}";
-
-    public void Classify
+    public void Classify()
     {
         if(RecoveryScore<20)
         {
@@ -42,12 +39,17 @@ public class Animal
         else if (RecoveryScore >= 60 && RecoveryScore < 80)
         {
             Status = "Recovery";
-            HousingUnit = "Instensive Care Unit";
+            HousingUnit = "Outdoor Enclosure";
         }
         else if (RecoveryScore >= 80 && RecoveryScore < 100)
         {
-            Status = "Critical";
-            HousingUnit = "Instensive Care Unit";
+            Status = "Release-Ready";
+            HousingUnit = "Pre-Release Camp";
         }
+    }
+
+    public string ToFileLine()
+    {
+        return $"{AnimalID}|{Name}|{Species}|{Age}|{RecoveryScore}|{Status}|{HousingUnit}";
     }
 }
