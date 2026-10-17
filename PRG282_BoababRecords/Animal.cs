@@ -1,3 +1,5 @@
+namespace PRG282_BoababRecords;
+
 public class Animal
 {
     public string AnimalID { get; set; }
@@ -8,8 +10,11 @@ public class Animal
     public string Status { get; set; }
     public string HousingUnit { get; set; }
 
+    public Animal()
+    {
+    }
 
-    public Animal(string animalID, string name, string species, int age, int recoveryscore, string status, string housingunit)
+    public Animal(string animalID, string name, string species, int age, int recoveryscore)
     {
         AnimalID = animalID;
         Name = name;
@@ -19,29 +24,40 @@ public class Animal
         Classify();
     }
 
+    public Animal(string animalID, string name, string species, int age, int recoveryscore, string status, string housingunit)
+    {
+        AnimalID = animalID;
+        Name = name;
+        Species = species;
+        Age = age;
+        RecoveryScore = recoveryscore;
+        Status = status;
+        HousingUnit = housingunit;
+    }
+
     public void Classify()
     {
-        if(RecoveryScore<20)
+        if (RecoveryScore >= 0 && RecoveryScore <= 19)
         {
             Status = "Critical";
-            HousingUnit = "Instensive Care Unit";
+            HousingUnit = "Intensive Care Unit";
         }
-        else if(RecoveryScore>=20 && RecoveryScore < 40) 
+        else if (RecoveryScore >= 20 && RecoveryScore <= 39)
         {
             Status = "Serious";
-            HousingUnit = "High-Dependancy Ward";
+            HousingUnit = "High-Dependency Ward";
         }
-        else if (RecoveryScore >= 40 && RecoveryScore < 60)
+        else if (RecoveryScore >= 40 && RecoveryScore <= 59)
         {
             Status = "Stable";
             HousingUnit = "Recovery Ward";
         }
-        else if (RecoveryScore >= 60 && RecoveryScore < 80)
+        else if (RecoveryScore >= 60 && RecoveryScore <= 79)
         {
-            Status = "Recovery";
+            Status = "Recovering";
             HousingUnit = "Outdoor Enclosure";
         }
-        else if (RecoveryScore >= 80 && RecoveryScore < 100)
+        else if (RecoveryScore >= 80 && RecoveryScore <= 100)
         {
             Status = "Release-Ready";
             HousingUnit = "Pre-Release Camp";
