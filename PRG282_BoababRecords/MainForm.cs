@@ -18,10 +18,13 @@ namespace PRG282_BoababRecords
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            AnimalsFromFile();
+            RefreshGrid();
+           
         }
 
-        private void AnimalsFromFile()
+      
+
+        private void dgvAnimals_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             string filePath = "animals.txt";
 
@@ -91,9 +94,18 @@ namespace PRG282_BoababRecords
             }
         }
 
-        private void dgvAnimals_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
 
+        // Reloads animal records and updates the DataGridView.
+        public void RefreshGrid()
+
+        {
+            animalList = AnimalFileManager.LoadAnimals();
+
+            dgvAnimals.DataSource = null;
+            dgvAnimals.DataSource = animalList;
+            dgvAnimals.Columns["AnimalID"].HeaderText = "Animal ID";
+            dgvAnimals.Columns["RecoveryScore"].HeaderText = "Recovery Score";
+            dgvAnimals.Columns["HousingUnit"].HeaderText = "Housing Unit";
         }
 
         /// <summary>
@@ -164,4 +176,9 @@ namespace PRG282_BoababRecords
             }
         }
     }
+
 }
+
+
+
+
