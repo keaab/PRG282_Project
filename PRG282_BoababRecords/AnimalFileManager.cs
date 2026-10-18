@@ -10,22 +10,27 @@ namespace PRG282_BoababRecords
         private static readonly string filePath =
         Path.Combine(AppContext.BaseDirectory, "animals.txt");
 
-        public static void EnsureFileExists()
+        public static bool EnsureFileExists()
         {
             try
             {
                 if (!File.Exists(filePath))
+                    
                 {
                     File.WriteAllText(filePath, "");
                 }
+
+                return true;
             }
             catch (IOException)
             {
                 MessageBox.Show("Unable to create animals.txt. Check whether the file is in use.");
+                return false;
             }
             catch (UnauthorizedAccessException)
             {
                 MessageBox.Show("Permission denied when accessing animals.txt.");
+                return false;
 
             }
         }
@@ -33,9 +38,8 @@ namespace PRG282_BoababRecords
         public static List<Animal> LoadAnimals()
         {
             List<Animal> animals = new List<Animal>();
-            EnsureFileExists();
 
-            if (!File.Exists(filePath))
+            if (!EnsureFileExists())
             {
                 return animals;
             }
@@ -91,6 +95,14 @@ namespace PRG282_BoababRecords
                 string species = fields[2].Trim();
                 string status = fields[5].Trim();
                 string housingUnit = fields[6].Trim();
+
+                if (name.Length < 1 || name.Length > 30 ||
+                        species.Length < 1 || species.Length > 30)
+                {
+                    skippedLines++;
+                    continue;
+                }
+
                 Animal animal = new Animal(
                     animalID,
                     name,
@@ -100,6 +112,7 @@ namespace PRG282_BoababRecords
                     status,
                     housingUnit
 
+                      
                  );
 
                 animals.Add(animal);
