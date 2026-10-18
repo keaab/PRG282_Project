@@ -40,9 +40,16 @@ namespace PRG282_BoababRecords
                     {
                         if (int.TryParse(parts[3], out int age) && int.TryParse(parts[4], out int score))
                         {
-                            string status = parts.Length > 5 ? parts[5] : "";
-                            string housing = parts.Length > 6 ? parts[6] : "";
-                            animals.Add(new Animal(parts[0], parts[1], parts[2], age, score, status, housing));
+                            if (parts.Length == 5)
+                            {
+                                // Uses the 5-param constructor that calculates Status and HousingUnit automatically via Classify()
+                                animals.Add(new Animal(parts[0], parts[1], parts[2], age, score));
+                            }
+                            else if (parts.Length >= 7)
+                            {
+                                // Uses the 7-param constructor
+                                animals.Add(new Animal(parts[0], parts[1], parts[2], age, score, parts[5], parts[6]));
+                            }
                         }
                     }
                 }
@@ -122,8 +129,7 @@ namespace PRG282_BoababRecords
                 int criticalCount = records.Count(a => a.Status.Equals("Critical", StringComparison.OrdinalIgnoreCase));
                 int seriousCount = records.Count(a => a.Status.Equals("Serious", StringComparison.OrdinalIgnoreCase));
                 int stableCount = records.Count(a => a.Status.Equals("Stable", StringComparison.OrdinalIgnoreCase));
-                int recoveringCount = records.Count(a => a.Status.Equals("Recovering", StringComparison.OrdinalIgnoreCase)
-                                                     || a.Status.Equals("Recovery", StringComparison.OrdinalIgnoreCase));
+                int recoveringCount = records.Count(a => a.Status.Equals("Recovering", StringComparison.OrdinalIgnoreCase));
                 int releaseReadyCount = records.Count(a => a.Status.Equals("Release-Ready", StringComparison.OrdinalIgnoreCase));
 
                 string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm");

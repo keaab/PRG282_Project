@@ -23,7 +23,7 @@ namespace PRG282_BoababRecords
 
         private void AnimalsFromFile()
         {
-            string filePath = "C:\\Users\\Keaan\\Documents\\GitHub\\PRG282_Project\\PRG282_BoababRecords\\animals.txt";
+            string filePath = "animals.txt";
 
             if (!File.Exists(filePath))
             {
@@ -44,7 +44,7 @@ namespace PRG282_BoababRecords
 
                     string[] parts = line.Split('|');
 
-                    if (parts.Length != 7)
+                    if (parts.Length < 5)
                     {
                         skippedLineCount++;
                         continue;
@@ -56,16 +56,14 @@ namespace PRG282_BoababRecords
                         continue;
                     }
 
-                    Animal a = new Animal();
-                    a.AnimalID = parts[0].Trim().ToUpper();
-                    a.Name = parts[1].Trim();
-                    a.Species = parts[2].Trim();
-                    a.Age = age;
-                    a.RecoveryScore = score;
-                    a.Status = parts[5].Trim();
-                    a.HousingUnit = parts[6].Trim();
-
-                    animalList.Add(a);
+                    if (parts.Length == 5)
+                    {
+                        animalList.Add(new Animal(parts[0].Trim().ToUpper(), parts[1].Trim(), parts[2].Trim(), age, score));
+                    }
+                    else if (parts.Length >= 7)
+                    {
+                        animalList.Add(new Animal(parts[0].Trim().ToUpper(), parts[1].Trim(), parts[2].Trim(), age, score, parts[5].Trim(), parts[6].Trim()));
+                    }
                 }
 
                 dgvAnimals.DataSource = null;
@@ -96,6 +94,74 @@ namespace PRG282_BoababRecords
         private void dgvAnimals_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
+        }
+
+        /// <summary>
+        /// Member 4: Calculates animal summary statistics and exports summary.txt.
+        /// </summary>
+        private void btnSummaryReport_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string report = SummaryReportEngine.GenerateAndExportSummary();
+                MessageBox.Show(report, "Summary Report", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"File error exporting summary: {ex.Message}", "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show($"Permission error exporting summary: {ex.Message}", "Access Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        /// <summary>
+        /// Member 4: Deletes the selected animal record after explicit confirmation.
+        /// </summary>
+        private void btnDeleteAnimal_Click(object sender, EventArgs e)
+        {
+            if (dgvAnimals.CurrentRow == null || dgvAnimals.CurrentRow.DataBoundItem == null)
+            {
+                MessageBox.Show("Please select an animal from the list to delete.", "Selection Required", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            Animal selectedAnimal = (Animal)dgvAnimals.CurrentRow.DataBoundItem;
+
+            DialogResult confirm = MessageBox.Show(
+                $"Delete {selectedAnimal.AnimalID} ({selectedAnimal.Name})? This cannot be undone.",
+                "Confirm Deletion",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question
+            );
+
+            if (confirm != DialogResult.Yes)
+            {
+                return;
+            }
+
+            try
+            {
+                bool deleted = SummaryReportEngine.DeleteAnimalRecord(selectedAnimal.AnimalID);
+
+                if (deleted)
+                {
+                    MessageBox.Show($"Animal record {selectedAnimal.AnimalID} deleted successfully.", "Record Deleted", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    AnimalsFromFile();
+                }
+                else
+                {
+                    MessageBox.Show("Record could not be found or was already removed.", "Delete Notice", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                }
+            }
+            catch (IOException ex)
+            {
+                MessageBox.Show($"File error during deletion: {ex.Message}", "File Locked", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch (UnauthorizedAccessException ex)
+            {
+                MessageBox.Show($"Permission error during deletion: {ex.Message}", "Access Denied", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
