@@ -91,7 +91,18 @@ public static class UpdateRecordHandler
         {
             fileLines[lineIndex] = updatedLine;
 
-            File.WriteAllLines(AnimalFileManager.filePath, fileLines);
+            try
+            {
+                File.WriteAllLines(AnimalFileManager.filePath, fileLines);
+            }
+            catch(IOException ex)
+            {
+                MessageBox.Show($"Could not read {AnimalFileManager.filePath}: {ex.Message}", "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            catch(UnauthorizedAccessException ex)
+            {
+                MessageBox.Show($"Could not read {AnimalFileManager.filePath}: {ex.Message}", "File Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 
