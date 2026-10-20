@@ -29,14 +29,14 @@ Example:
 2. summary.txt
 Generated each time the summary report is run. Overwrites the file with the following format:
 
-BAOBAB RIDGE WILDLIFE REHABILITATION CENTRE
-ANIMAL SUMMARY REPORT
-Generated: YYYY-MM-DD HH:mm
-----------------------------------------
-Total animals: 8
-Average age (years): 10.75
-Average recovery score: 51.50
-----------------------------------------
+### BAOBAB RIDGE WILDLIFE REHABILITATION CENTRE
+### ANIMAL SUMMARY REPORT
+### Generated: YYYY-MM-DD HH:mm
+### ----------------------------------------
+### Total animals: 8
+### Average age (years): 10.75
+### Average recovery score: 51.50
+### ----------------------------------------
 Animals per status:
  Critical: 2
  Serious: 1
