@@ -12,7 +12,7 @@ namespace PRG282_BoababRecords
     /// </summary>
     public static class SummaryReportEngine
     {
-        private const string DataFileName = "animals.txt";
+        private static string DataFileName = AnimalFileManager.filePath;
         private const string SummaryFileName = "summary.txt";
 
         /// <summary>
@@ -135,20 +135,20 @@ namespace PRG282_BoababRecords
                 string timestamp = DateTime.Now.ToString("yyyy-MM-dd HH:mm");
 
                 string reportContent =
-$@"BAOBAB RIDGE WILDLIFE REHABILITATION CENTRE
-ANIMAL SUMMARY REPORT
-Generated: {timestamp}
-----------------------------------------
-Total animals: {totalCount}
-Average age (years): {avgAgeStr}
-Average recovery score: {avgScoreStr}
-----------------------------------------
-Animals per status:
-  Critical: {criticalCount}
-  Serious: {seriousCount}
-  Stable: {stableCount}
-  Recovering: {recoveringCount}
-  Release-Ready: {releaseReadyCount}";
+                $@"BAOBAB RIDGE WILDLIFE REHABILITATION CENTRE
+                ANIMAL SUMMARY REPORT
+                Generated: {timestamp}
+                ----------------------------------------
+                Total animals: {totalCount}
+                Average age (years): {avgAgeStr}
+                Average recovery score: {avgScoreStr}
+                ----------------------------------------
+                Animals per status:
+                Critical: {criticalCount}
+                Serious: {seriousCount}
+                Stable: {stableCount}
+                Recovering: {recoveringCount}
+                Release-Ready: {releaseReadyCount}";
 
                 File.WriteAllText(SummaryFileName, reportContent);
 
