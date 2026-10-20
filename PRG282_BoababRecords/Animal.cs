@@ -10,10 +10,12 @@ public class Animal
     public string Status { get; set; }
     public string HousingUnit { get; set; }
 
+    // Default constructor
     public Animal()
     {
     }
 
+    // Constructor used when creating a new animal
     public Animal(string animalID, string name, string species, int age, int recoveryscore)
     {
         AnimalID = animalID;
@@ -24,6 +26,7 @@ public class Animal
         Classify();
     }
 
+    // Constructor used when loading an animal record directly from file
     public Animal(string animalID, string name, string species, int age, int recoveryscore, string status, string housingunit)
     {
         AnimalID = animalID;
@@ -35,6 +38,7 @@ public class Animal
         HousingUnit = housingunit;
     }
 
+    // Calculates status and housing unit based on the recovery score
     public void Classify()
     {
         if (RecoveryScore >= 0 && RecoveryScore <= 19)
@@ -64,6 +68,7 @@ public class Animal
         }
     }
 
+    // Converts the animal object into a string for animals.txt
     public string ToFileLine()
     {
         return $"{AnimalID}|{Name}|{Species}|{Age}|{RecoveryScore}|{Status}|{HousingUnit}";
