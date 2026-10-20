@@ -24,7 +24,7 @@ namespace PRG282_BoababRecords
             RefreshGrid();
         }
 
-        // When a row in the grid is clicked, load the record into the edit textboxes (Section 3.1 & 3.2)
+        // When a row in the grid is clicked, load the record into the edit textboxes
         private void dgvAnimals_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0 && e.RowIndex < animalList.Count)
@@ -34,7 +34,7 @@ namespace PRG282_BoababRecords
             }
         }
 
-        // Helper to load animal data and switch to Edit Mode (Section 3.2)
+        // Helper to load animal data and switch to Edit Mode
         private void LoadAnimalIntoForm(Animal animal)
         {
             AnimalID_Tbx.Text = animal.AnimalID;
@@ -57,7 +57,7 @@ namespace PRG282_BoababRecords
             }
         }
 
-        // Searches for an animal by ID and loads it into the edit textboxes (Section 3.1)
+        // Searches for an animal by ID and loads it into the edit textboxes 
         private void Search_Btn_Click(object sender, EventArgs e)
         {
             string searchId = SearchBox_Tbx.Text.Trim();
@@ -341,7 +341,7 @@ namespace PRG282_BoababRecords
             // Refreshes the DGV to display the new data that has been written to the txt file.
             RefreshGrid();
 
-            // Returns to Add mode with cleared fields (Section 3.5)
+            // Returns to Add mode with cleared fields
             ResetInputBoxes();
         }
     }
