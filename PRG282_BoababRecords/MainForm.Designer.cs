@@ -31,6 +31,8 @@ namespace PRG282_BoababRecords
             RecoveryScore_Tbx = new TextBox();
             SaveUpdateChanges_Btn = new Button();
             ClearChanges_Btn = new Button();
+            SearchBox_Tbx = new TextBox();
+            Search_Btn = new Button();
             ((System.ComponentModel.ISupportInitialize)dgvAnimals).BeginInit();
             SuspendLayout();
             // 
@@ -52,7 +54,7 @@ namespace PRG282_BoababRecords
             // 
             // btnDeleteAnimal
             // 
-            btnDeleteAnimal.Location = new Point(864, 466);
+            btnDeleteAnimal.Location = new Point(864, 507);
             btnDeleteAnimal.Margin = new Padding(2);
             btnDeleteAnimal.Name = "btnDeleteAnimal";
             btnDeleteAnimal.Size = new Size(172, 41);
@@ -63,7 +65,7 @@ namespace PRG282_BoababRecords
             // 
             // btnSummaryReport
             // 
-            btnSummaryReport.Location = new Point(864, 414);
+            btnSummaryReport.Location = new Point(865, 462);
             btnSummaryReport.Margin = new Padding(2);
             btnSummaryReport.Name = "btnSummaryReport";
             btnSummaryReport.Size = new Size(172, 41);
@@ -175,11 +177,38 @@ namespace PRG282_BoababRecords
             ClearChanges_Btn.Visible = false;
             ClearChanges_Btn.Click += ClearChanges_Btn_Click;
             // 
+            // SearchBox_Tbx
+            // 
+            SearchBox_Tbx.Location = new Point(737, 338);
+            SearchBox_Tbx.Name = "SearchBox_Tbx";
+            SearchBox_Tbx.Size = new Size(205, 23);
+            SearchBox_Tbx.TabIndex = 14;
+            SearchBox_Tbx.Text = "ID:";
+            SearchBox_Tbx.Click += SearchBox_Tbx_Click;
+            // 
+            // Search_Btn
+            // 
+            Search_Btn.BackColor = Color.Khaki;
+            Search_Btn.FlatAppearance.BorderColor = Color.FromArgb(192, 64, 0);
+            Search_Btn.FlatAppearance.BorderSize = 2;
+            Search_Btn.FlatAppearance.MouseDownBackColor = Color.FromArgb(192, 64, 0);
+            Search_Btn.FlatAppearance.MouseOverBackColor = Color.FromArgb(255, 192, 128);
+            Search_Btn.Font = new Font("Segoe UI", 9F, FontStyle.Bold);
+            Search_Btn.Location = new Point(936, 336);
+            Search_Btn.Name = "Search_Btn";
+            Search_Btn.Size = new Size(100, 25);
+            Search_Btn.TabIndex = 15;
+            Search_Btn.Text = "Search";
+            Search_Btn.UseVisualStyleBackColor = false;
+            Search_Btn.Click += Search_Btn_Click;
+            // 
             // MainForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1048, 518);
+            ClientSize = new Size(1048, 559);
+            Controls.Add(Search_Btn);
+            Controls.Add(SearchBox_Tbx);
             Controls.Add(ClearChanges_Btn);
             Controls.Add(SaveUpdateChanges_Btn);
             Controls.Add(RecoveryScore_Tbx);
@@ -219,5 +248,7 @@ namespace PRG282_BoababRecords
         private TextBox RecoveryScore_Tbx;
         private Button SaveUpdateChanges_Btn;
         private Button ClearChanges_Btn;
+        private TextBox SearchBox_Tbx;
+        private Button Search_Btn;
     }
 }

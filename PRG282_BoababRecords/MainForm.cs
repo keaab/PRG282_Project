@@ -210,7 +210,7 @@ namespace PRG282_BoababRecords
             string[] fileData = UpdateRecordHandler.DataReadFromTextBoxes(UpdateName_Tbx, UpdateSpecies_Tbx, UpdateAge_Tbx, RecoveryScore_Tbx);
             int rowIndex = dgvAnimals.CurrentRow.Index;
             bool ValidTextBoxFields = UpdateRecordHandler.AllTextBoxesValid(fileData);
-            
+
             if (ValidTextBoxFields)
             {
                 Animal updatedAnimalRecord = UpdateRecordHandler.CreateUpdatedAnimalRecord(animalList, rowIndex, fileData);
@@ -230,6 +230,26 @@ namespace PRG282_BoababRecords
             UpdateSpecies_Tbx.Text = string.Empty;
             UpdateAge_Tbx.Text = string.Empty;
             RecoveryScore_Tbx.Text = string.Empty;
+        }
+
+        private void Search_Btn_Click(object sender, EventArgs e)
+        {
+            //Compares the text field of the search box to all the animal ids in the system
+            string id = UpdateRecordHandler.IdQueryResult(SearchBox_Tbx.Text, UpdateRecordHandler.ReadIdsFromFile(animalList));
+            List<string> listOfIds = UpdateRecordHandler.ReadIdsFromFile(animalList);
+            int rowIndex = listOfIds.IndexOf(id);
+
+            if (rowIndex >= 0)
+            {
+                dgvAnimals.CurrentCell = dgvAnimals.Rows[rowIndex].Cells[0];
+            }
+
+            SearchBox_Tbx.Text = "ID:";
+        }
+
+        private void SearchBox_Tbx_Click(object sender, EventArgs e)
+        {
+            SearchBox_Tbx.Text = string.Empty;
         }
     }
 
