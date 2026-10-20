@@ -1,6 +1,6 @@
 WR-0001|Tara|Leopard|2|70|Recovering|Outdoor Enclosure
 WR-0002|Harry|Tortoise|12|55|Stable|Recovery Ward
-WR-0003|Sarah|Pygmy Owl|4|23|Serious|High-Dependency Ward
+WR-0003|Sarah|Pymgy Owl|4|23|Serious|High-Dependency Ward
 WR-0004|Ivan|White Rhinoceros|8|82|Release-Ready|Pre-Release Camp
 WR-0005|Samurai|Mugger Crocodile|20|15|Critical|Intensive Care Unit
 WR-0006|Marty|Zebra|7|98|Release-Ready|Pre-Release Camp

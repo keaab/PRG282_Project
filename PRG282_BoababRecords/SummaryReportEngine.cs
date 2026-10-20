@@ -12,7 +12,7 @@ namespace PRG282_BoababRecords
     /// </summary>
     public static class SummaryReportEngine
     {
-        private const string DataFileName = "animals.txt";
+        private static string DataFileName = AnimalFileManager.filePath;
         private const string SummaryFileName = "summary.txt";
 
         /// <summary>

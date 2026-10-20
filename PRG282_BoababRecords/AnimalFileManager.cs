@@ -7,7 +7,7 @@ namespace PRG282_BoababRecords
 {
     internal class AnimalFileManager
     {
-        public static readonly string filePath =
+        public static readonly string filePath = 
         Path.Combine(AppContext.BaseDirectory, "animals.txt");
 
         public static bool EnsureFileExists()

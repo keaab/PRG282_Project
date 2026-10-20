@@ -10,7 +10,7 @@ namespace PRG282_BoababRecords
 {
     public partial class MainForm : Form
     {
-        private List<Animal> animalList = new List<Animal>();
+        private List<Animal> animalList = AnimalFileManager.LoadAnimals();
 
 
         public MainForm()
@@ -27,7 +27,7 @@ namespace PRG282_BoababRecords
 
         private void dgvAnimals_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            string filePath = "animals.txt";
+            string filePath = AnimalFileManager.filePath;
 
             if (!File.Exists(filePath))
             {
@@ -180,6 +180,7 @@ namespace PRG282_BoababRecords
 
         private void UpdateAnimalRecord_Btn_Click(object sender, EventArgs e)
         {
+            UpdateRecordHandler.UpdateDataInTextBoxes(UpdateName_Tbx, UpdateSpecies_Tbx, UpdateAge_Tbx, RecoveryScore_Tbx, animalList[dgvAnimals.CurrentRow.Index]);
             ClearChanges_Btn.Visible = true;
             SaveUpdateChanges_Btn.Visible = true;
             UpdateAnimalRecord_Btn.Visible = false;
@@ -192,21 +193,43 @@ namespace PRG282_BoababRecords
 
         private void ClearChanges_Btn_Click(object sender, EventArgs e)
         {
-            UpdateRecordHandler.ClearTextBoxes(UpdateName_Tbx, UpdateSpecies_Tbx, UpdateAge_Tbx, RecoveryScore_Tbx);
+            //Toggles the update menu button so that they cannot be intercted with. Turns on the Update button.
             ClearChanges_Btn.Visible = false;
             SaveUpdateChanges_Btn.Visible = false;
             UpdateAnimalRecord_Btn.Visible = true;
+
+            //Clears the textboxes text field to look more visibly appealing.
+            UpdateName_Tbx.Text = string.Empty;
+            UpdateSpecies_Tbx.Text = string.Empty;
+            UpdateAge_Tbx.Text = string.Empty;
+            RecoveryScore_Tbx.Text = string.Empty;
         }
 
         private void SaveUpdateChanges_Btn_Click(object sender, EventArgs e)
         {
             string[] fileData = UpdateRecordHandler.DataReadFromTextBoxes(UpdateName_Tbx, UpdateSpecies_Tbx, UpdateAge_Tbx, RecoveryScore_Tbx);
             int rowIndex = dgvAnimals.CurrentRow.Index;
-            Animal updatedAnimalRecord = UpdateRecordHandler.CreateUpdatedAnimalRecord(animalList, rowIndex, fileData);
-            UpdateRecordHandler.WriteUpdatedAnimalToFile(updatedAnimalRecord, rowIndex);
+            bool ValidTextBoxFields = UpdateRecordHandler.AllTextBoxesValid(fileData);
+            
+            if (ValidTextBoxFields)
+            {
+                Animal updatedAnimalRecord = UpdateRecordHandler.CreateUpdatedAnimalRecord(animalList, rowIndex, fileData);
+                UpdateRecordHandler.WriteUpdatedAnimalToFile(updatedAnimalRecord, rowIndex);
+            }
+
+            //Refreshs the DVG to display the new data that has been written to the txt file.
+            RefreshGrid();
+
+            //Toggles the update menu button so that they cannot be intercted with. Turns on the Update button.
             ClearChanges_Btn.Visible = false;
             SaveUpdateChanges_Btn.Visible = false;
             UpdateAnimalRecord_Btn.Visible = true;
+
+            //Clears the textboxes text field to look more visibly appealing.
+            UpdateName_Tbx.Text = string.Empty;
+            UpdateSpecies_Tbx.Text = string.Empty;
+            UpdateAge_Tbx.Text = string.Empty;
+            RecoveryScore_Tbx.Text = string.Empty;
         }
     }
 
