@@ -21,11 +21,11 @@ A Windows Forms system built to manage wild animal rehabilitation records at the
 Stores animal records in UTF-8 encoding. Each valid record is on a single line separated by (`|`):
 
 - ID|Name|Species|Age|Score|Status|Housing Unit
-- 
+
 Example:
 - WR-0001|Tara|Leopard|2|70|Recovering|Outdoor Enclosure
 - WR-0002|Harry|Tortoise|12|55|Stable|Recovery Ward
-- 
+
 2. summary.txt
 Generated each time the summary report is run. Overwrites the file with the following format:
 
@@ -37,6 +37,22 @@ Total animals: 8
 Average age (years): 10.75
 Average recovery score: 51.50
 ----------------------------------------
+
+Example:
+- WR-0001|Tara|Leopard|2|70|Recovering|Outdoor Enclosure
+- WR-0002|Harry|Tortoise|12|55|Stable|Recovery Ward
+
+2. summary.txt
+Generated each time the summary report is run. Overwrites the file with the following format:
+
+### BAOBAB RIDGE WILDLIFE REHABILITATION CENTRE
+### ANIMAL SUMMARY REPORT
+### Generated: YYYY-MM-DD HH:mm
+### ----------------------------------------
+### Total animals: 8
+### Average age (years): 10.75
+### Average recovery score: 51.50
+### ----------------------------------------
 Animals per status:
  Critical: 2
  Serious: 1
