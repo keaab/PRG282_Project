@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Linq;
 
 namespace PRG282_BoababRecords;
 public static class UpdateRecordHandler
@@ -93,5 +94,30 @@ public static class UpdateRecordHandler
             File.WriteAllLines(AnimalFileManager.filePath, fileLines);
         }
     }
+
+    public static string IdQueryResult(string inputId, List<string> listOfIds)
+    {
+        if(inputId == null || inputId == string.Empty || inputId == "ID:")
+        {
+            MessageBox.Show("Please enter a valid ID.", "ID cannot be found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            return "ID:";
+        }
+        else
+        {
+            return listOfIds.FirstOrDefault(id => string.Equals(id, inputId, StringComparison.OrdinalIgnoreCase));
+        }
+    }
+
+    public static List<string> ReadIdsFromFile(List<Animal> animalsInFile)
+    {
+        List<string> listOfIds = new List<string>();
+
+        foreach(Animal animal in animalsInFile)
+        {
+            listOfIds.Add(animal.AnimalID);
+        }
+
+        return listOfIds;
+    }   
 }
 
