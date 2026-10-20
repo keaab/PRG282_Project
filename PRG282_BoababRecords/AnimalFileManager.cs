@@ -9,7 +9,7 @@ namespace PRG282_BoababRecords
     {
         public static readonly string filePath = 
         Path.Combine(AppContext.BaseDirectory, "animals.txt");
-
+      
         public static bool EnsureFileExists()
         {
             try

@@ -29,6 +29,22 @@ Example:
 2. summary.txt
 Generated each time the summary report is run. Overwrites the file with the following format:
 
+BAOBAB RIDGE WILDLIFE REHABILITATION CENTRE
+ANIMAL SUMMARY REPORT
+Generated: YYYY-MM-DD HH:mm
+----------------------------------------
+Total animals: 8
+Average age (years): 10.75
+Average recovery score: 51.50
+----------------------------------------
+
+Example:
+- WR-0001|Tara|Leopard|2|70|Recovering|Outdoor Enclosure
+- WR-0002|Harry|Tortoise|12|55|Stable|Recovery Ward
+
+2. summary.txt
+Generated each time the summary report is run. Overwrites the file with the following format:
+
 ### BAOBAB RIDGE WILDLIFE REHABILITATION CENTRE
 ### ANIMAL SUMMARY REPORT
 ### Generated: YYYY-MM-DD HH:mm
